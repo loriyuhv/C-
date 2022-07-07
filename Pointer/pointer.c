@@ -298,7 +298,9 @@ int main()
 // 
 // 4. 指针和结构体
 // 
+
 // 5. 多级指针
+
 // 例1：
 //# include<stdio.h>
 //int main()
@@ -313,23 +315,23 @@ int main()
 //	return 0;
 //}
 // 例2：
-#include<stdio.h>
-void f(int** q) {
-	**q = 20;
-}
-
-void g() {
-	int i = 10;
-	int* p = &i;
-	f(&p);
-	printf("%d\n", *p);
-}
-
-int main()
-{
-	g();
-	return 0;
-}
+//#include<stdio.h>
+//void f(int** q) {
+//	**q = 20; // *q 就是p **q == *p 
+//}
+//
+//void g() {
+//	int i = 10;
+//	int* p = &i;
+//	f(&p);
+//	printf("%d\n", *p);
+//}
+//
+//int main()
+//{
+//	g();
+//	return 0;
+//}
 
 // 专题 // 动态内存分配
 
@@ -475,6 +477,48 @@ int main()
 
 
 // 跨函数使用内存的问题
+// 例1.
+//#include<stdio.h>
+//
+//void f(int** q) {
+//	int i = 5;
+//	// *q等价于p q和**q都不等价于p
+//	*q = &i; // p = &i;
+//
+//}
+//
+//int main()
+//{
+//	int* p;
+//	f(&p);
+//	printf("%d\n", *p); // 本语句语法没有问题，但逻辑上有问题。
+//
+//	return 0;
+//}
+// 注意：这样写程序是会造成逻辑上的错误。
+// 所以：静态内存不能跨函数使用
+// 例2.
+//#include<stdio.h>
+//#include<malloc.h>
+//
+//void f(int** q) {
+//	*q = (int*)malloc(sizeof(int));
+//	// 等价于 p = (int*)malloc(sizeof(int));
+//	// q = 5; // error
+//	// *q = 5; // p = 5;
+//	**q = 5;
+//}
+//int main()
+//{
+//	int* p;
+//
+//	f(&p);
+//	printf("%d\n", *p);
+//	return 0;
+//}
+// 所以：动态内存能跨函数使用
+// 例题
+
 
 
 //#include<stdio.h>
