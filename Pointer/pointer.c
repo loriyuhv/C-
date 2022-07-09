@@ -380,28 +380,40 @@ int main()
 
 	// 动态数组很好地解决了传统数组的这4个缺陷。
 	// 传统数组也叫静态数组
-//#include<stdio.h>
-//#include<malloc.h>
-//int main()
-//{
-//	// malloc 是memory（内存）allocate（分配）的缩写
-//	int i = 5; // 分配了4个字节 静态分配 //11行
-//	int* p = (int*)malloc(4);
-//	// 1）要使用malloc函数，必须添加malloc.h这个头文件。
-//	// 2）malloc函数只有一个形参，并且形参是整型。
-//	// 3）4表示请求系统为本程序分配4个字节。
-//	// 4）malloc函数只能返回第一个字节的地址。
-//		// (char*)malloc(200); 200个char型变量
-//		// (int*)malloc(200); 50个int型变量
-//	// 5）这行分配了8个字节，p变量占4个字节，p所指向的内存也占4个字节。
-//	// 6）p本身所占的内存是静态分配的，p所指向的内存是动态分配的。
-//	*p = 5; // *p代表的就是一个int型变量，只不过*p这个整型变量的内存分配方式和11行的i变量的分配方式不同。
-//	free(p); // free(p) 表示把p所指向的内存给释放掉。
-//			// p本身的内存是静态的，不能由程序员手动释放，p本身的内存只能在p变量所在的函数运行终止时由系统自动释放。
-//	printf("同志们好！！！\n");
-//
-//	return 0;
-//}
+#include<stdio.h>
+#include<malloc.h>
+
+struct Student {
+	int a;
+	float b;
+	char c;
+};
+
+int main()
+{
+	struct Student st;
+	// malloc 是memory（内存）allocate（分配）的缩写
+	int i = 5; // 分配了4个字节 静态分配 //11行
+	int* p = (int*)malloc(4);
+	int* q = (struct Student*)malloc(sizeof(int) * 2);
+	printf("%d\n", sizeof(st));
+
+	printf("%d", sizeof(p));
+	// 1）要使用malloc函数，必须添加malloc.h这个头文件。
+	// 2）malloc函数只有一个形参，并且形参是整型。
+	// 3）4表示请求系统为本程序分配4个字节。
+	// 4）malloc函数只能返回第一个字节的地址。
+		// (char*)malloc(200); 200个char型变量
+		// (int*)malloc(200); 50个int型变量
+	// 5）这行分配了8个字节，p变量占4个字节，p所指向的内存也占4个字节。
+	// 6）p本身所占的内存是静态分配的，p所指向的内存是动态分配的。
+	*p = 5; // *p代表的就是一个int型变量，只不过*p这个整型变量的内存分配方式和11行的i变量的分配方式不同。
+	free(p); // free(p) 表示把p所指向的内存给释放掉。
+			// p本身的内存是静态的，不能由程序员手动释放，p本身的内存只能在p变量所在的函数运行终止时由系统自动释放。
+	printf("同志们好！！！\n");
+
+	return 0;
+}
 // malloc函数用法
 //#include<stdio.h>
 //#include<malloc.h>
