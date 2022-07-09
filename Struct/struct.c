@@ -228,86 +228,86 @@
 // 举例
 // 动态构造存放学生信息的结构体数组。
 // 然后按分数排序输出
-//#include<stdio.h>
-//#include<malloc.h>
-//
-//struct Student {
-//	int age;
-//	float score;
-//	char name[100];
-//};
-//
-//void sort(struct Student* pArr, int len) {
-//
-//	int i, j;
-//	struct Student temp;
-//
-//	for (i = 0; i < len - 1; i++) {
-//		for (j = 0; j < (len - 1) - i; j++) {
-//			if (pArr[j].score < pArr[j + 1].score) {
-//				temp = pArr[j];
-//				pArr[j] = pArr[j + 1];
-//				pArr[j + 1] = temp;
-//			}
-//		}
-//	}
-//
-//	for (i = 0; i < len; i++) {
-//		printf("请输出第%d个学生信息：", i + 1);
-//		printf("age = %d, name = %s, score = %f\n", pArr[i].age, pArr[i].name, pArr[i].score);
-//	}
-//
-//	return;
-//}
-//
-//int main()
-//{
-//	int len, i;
-//	struct Student* pArr;
-//
-//	// 动态的构造一维数组
-//	printf("请输入学生的个数：");
-//	scanf_s("%d", &len);
-//	pArr = (struct Student *)malloc(len * sizeof(int));
-//
-//	// 输入
-//	for (i = 0; i < len; i++) {
-//		printf("请输入第%d个学生信息：\n", i + 1);
-//		printf("age = ");
-//		scanf("%d", &pArr[i].age);
-//		printf("name = ");
-//		//name是数组名，本身就已经是首元素的地址。
-//		scanf("%s", pArr[i].name);
-//		printf("score = ");
-//		scanf("%f", &pArr[i].score);
-//	}
-//
-//	// 输出
-//	for (i = 0; i < len; i++) {
-//		printf("请输出第%d个学生信息：", i + 1);
-//		printf("age = %d, name = %s, score = %f\n", pArr[i].age, pArr[i].name, pArr[i].score);
-//	}
-//
-//	sort(pArr, len);
-//
-//	return 0;
-//}
+#include<stdio.h>
+#include<malloc.h>
 
-
-// 枚举
-# include<stdio.h>
-
-// 只定义了一个数据类型，并没有定义变量，该数据类型的名字是enum WeekDay
-enum WeekDay {
-	Monday, TuesDay, WednesDay, ThursDay, FriDay, SaturDay, SunDay
+struct Student {
+	int age;
+	float score;
+	char name[100];
 };
+
+void sort(struct Student* pArr, int len) {
+
+	int i, j;
+	struct Student temp;
+
+	for (i = 0; i < len - 1; i++) {
+		for (j = 0; j < (len - 1) - i; j++) {
+			if (pArr[j].score < pArr[j + 1].score) {
+				temp = pArr[j];
+				pArr[j] = pArr[j + 1];
+				pArr[j + 1] = temp;
+			}
+		}
+	}
+
+	for (i = 0; i < len; i++) {
+		printf("请输出第%d个学生信息：", i + 1);
+		printf("age = %d, name = %s, score = %f\n", pArr[i].age, pArr[i].name, pArr[i].score);
+	}
+
+	return;
+}
 
 int main()
 {
-	enum WeekDay day = WednesDay;
-	printf("%d\n", day);
+	int len, i;
+	struct Student* pArr;
+
+	// 动态的构造一维数组
+	printf("请输入学生的个数：");
+	scanf_s("%d", &len);
+	pArr = (struct Student *)malloc(len * sizeof(struct Student));
+
+	// 输入
+	for (i = 0; i < len; i++) {
+		printf("请输入第%d个学生信息：\n", i + 1);
+		printf("age = ");
+		scanf("%d", &pArr[i].age);
+		printf("name = ");
+		//name是数组名，本身就已经是首元素的地址。
+		scanf("%s", pArr[i].name);
+		printf("score = ");
+		scanf("%f", &pArr[i].score);
+	}
+
+	// 输出
+	for (i = 0; i < len; i++) {
+		printf("请输出第%d个学生信息：", i + 1);
+		printf("age = %d, name = %s, score = %f\n", pArr[i].age, pArr[i].name, pArr[i].score);
+	}
+
+	sort(pArr, len);
+
 	return 0;
 }
+
+
+// 枚举
+//# include<stdio.h>
+//
+//// 只定义了一个数据类型，并没有定义变量，该数据类型的名字是enum WeekDay
+//enum WeekDay {
+//	Monday, TuesDay, WednesDay, ThursDay, FriDay, SaturDay, SunDay
+//};
+//
+//int main()
+//{
+//	enum WeekDay day = WednesDay;
+//	printf("%d\n", day);
+//	return 0;
+//}
 
 
 // 链表
