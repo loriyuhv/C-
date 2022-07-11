@@ -33,6 +33,10 @@
 //#include<malloc.h>
 //#include<stdlib.h>
 //
+//# define bool char
+//# define true 1
+//# define false 0
+//
 //// 定义了一个数据类型，该数据类型的名字叫做struct Arr,
 //// 该数据类型含有三个成员，分别是pBase, len, cnt
 //struct Arr {
@@ -45,14 +49,13 @@
 //bool append_arr(struct Arr* pArr, int val);	// 追加
 //bool insert_arr(struct Arr* pArr, int pos, int val); // pos的值从1开始
 //bool delete_arr(struct Arr* pArr, int pos, int *pVal);
-//int get();
 //bool is_empty(struct Arr* pArr);
 //bool is_full(struct Arr* pArr);
 //void sort_arr(struct Arr* pArr);
 //void show_arr(struct Arr* pArr);
 //void inversion_arr(struct Arr* pArr);
 //
-//int main()
+//int main01()
 //{
 //	struct Arr arr;
 //	int i, val;
@@ -103,21 +106,18 @@
 //	}
 //	return;
 //}
-//
 //bool is_empty(struct Arr* pArr) {
 //	if (pArr->cnt == 0)
 //		return true;
 //	else
 //		return false;
 //}
-//
 //bool is_full(struct Arr* pArr) {
 //	if (pArr->cnt == pArr->len)
 //		return true;
 //	else
 //		return false;
 //}
-//
 //void show_arr(struct Arr* pArr) {
 //	if (is_empty(pArr))
 //		printf("数组为空!\n");
@@ -128,7 +128,6 @@
 //		printf("\n");
 //	}
 //}
-//
 //bool append_arr(struct Arr* pArr, int val) {
 //	// 满是返回false
 //	if (is_full(pArr))
@@ -138,7 +137,6 @@
 //	pArr->cnt++;
 //	return true;
 //}
-//
 //bool insert_arr(struct Arr* pArr, int pos, int val) {
 //	int i;
 //	if (is_full(pArr))
@@ -152,7 +150,6 @@
 //	(pArr->cnt)++;
 //	return true;
 //}
-//
 //bool delete_arr(struct Arr* pArr, int pos, int* pVal) {
 //	if (is_empty(pArr))
 //		return false;
@@ -164,7 +161,6 @@
 //	}
 //	(pArr->cnt)--;
 //}
-//
 //void inversion_arr(struct Arr* pArr) {
 //	int i = 0;
 //	int j = pArr->cnt - 1;
@@ -179,7 +175,6 @@
 //	}
 //	return;
 //}
-//
 //void sort_arr(struct Arr* pArr) {
 //	int i, j, temp;
 //	for (i = 0; i < pArr->cnt - 1; i++) {
@@ -192,6 +187,7 @@
 //		}
 //	}
 //}
+
 
 
 // typedef
@@ -320,182 +316,182 @@
 	// 求长度
 	// 排序 
 // coding
-# include<stdio.h>
-# include<malloc.h>
-# include<stdlib.h>
-
-# define bool char
-# define true 1
-# define false 0
-
-typedef struct Node {
-	int data;	// 数据域
-	struct Node* pNext;	// 指针域
-}*PNODE, NODE;
-
-PNODE create_list();
-void traverse_list(PNODE pHead);
-bool is_empty(PNODE pHead);
-int length_list(PNODE pHead);
-bool insert_list(PNODE pHead, int pos, int val);
-bool delete_list(PNODE pHead, int pos, int* value);
-void sort_list(PNODE pHead);
-
-int main() {
-	PNODE pHead = NULL;
-	// 创建一个非循环单链表，并将该链表的头结点的地址赋给pHead
-	pHead = create_list(); 
-	//printf("%x\n", pHead);
-	//is_empty(pHead);
-	//printf("链表长度为：%d\n", length_list(pHead));
-	//sort_list(pHead);
-	//insert_list(pHead, 1, 88);
-	int val;
-	traverse_list(pHead);
-	delete_list(pHead, 3, &val);
-	printf("删除了元素%d\n", val);
-	traverse_list(pHead);
-	return 0;
-}
-
-PNODE create_list() {
-	int len;	// 用来存放节点的个数
-	int i;
-	int val; // 用来临时存放用户输入节点的值。
-	
-	// 分配了一个不存放有效数据的头结点
-	PNODE pHead = (PNODE)malloc(sizeof(NODE));
-	printf("%x\n", pHead);
-
-	if (NULL == pHead) {
-		printf("分配失败，程序终止！！！\n");
-		exit(-1);
-	}
-
-	PNODE pTail = pHead;
-	pTail->pNext = NULL;
-	printf("%x\n", pTail);
-
-	printf("请输入您需要生成的链表节点的个数：len=");
-	scanf_s("%d", &len);
-
-	loop: if (len < 1) {
-		printf("输入错误，请输入大于1的整数：");
-		scanf_s("%d", &len);
-		goto loop;
-	}
-
-	for (i = 0; i < len; i++) {
-		printf("请输入第%d个节点的值：", i + 1);
-		scanf_s("%d", &val);
-
-		PNODE pNew = (PNODE)malloc(sizeof(NODE));
-		printf("第%d个节点地址：%x\n", i + 1, pNew);
-		if (NULL == pNew) {
-			printf("分配失败，程序终止！！！\n");
-			exit(-1);
-		}
-		pNew->data = val;
-		pTail->pNext = pNew;
-		pNew->pNext = NULL;
-		pTail = pNew;
-	}
-	return pHead;
-}
-void traverse_list(PNODE pHead) {
-	PNODE p = pHead->pNext;
-
-	while (NULL != p) {
-		printf("%d\t", p->data);
-		p = p->pNext;
-	}
-	printf("\n");
-	return;
-}
-bool is_empty(PNODE pHead) {
-	if (pHead->pNext == NULL) {
-		printf("链表为空！！！\n");
-		return true;
-	}
-	else {
-		printf("链表不空！！！");
-		return false;
-	}
-}
-int length_list(PNODE pHead) {
-	PNODE p = pHead->pNext;
-	int i = 0;
-	while (NULL != p) {
-		i++;
-		p = p->pNext;
-	}
-	return i;
-}
-
-bool insert_list(PNODE pHead, int pos, int val) {
-	int i = 0;
-	PNODE p = pHead;
-	// 1 2 3   2 88   1 88 2 3
-	while (NULL != p && i < pos - 1) {
-		p = p->pNext;
-		i++;
-	}
-	if (i > pos - 1 || NULL == p)
-		return false;
-	PNODE pNew = (PNODE)malloc(sizeof(NODE));
-	if (NULL == pNew) {
-		printf("动态内存分配失败！！！\n");
-		exit(-1);
-	}
-	/*pNew->data = val;
-	PNODE q = p->pNext;
-	p->pNext = pNew;
-	pNew->pNext = q;*/
-	// 改写
-	pNew->data = val;
-	pNew->pNext = p->pNext;
-	p->pNext = pNew;
-	return;
-}
-// 错误 当节点为1个时
-// 输出 
-// 删除了元素-858993460
-// 1
-bool delete_list(PNODE pHead, int pos, int* value) {
-	PNODE p = pHead;
-	int i = 0;
-	while (NULL != p && i < pos - 1) {
-		p = p->pNext;
-		i++;
-	}
-	// 1 2 3  2   1 3
-	// p = 1
-	// 原代码
-	/*if (NULL == p || 1 < pos - 1)
-		return false;*/
-	// 修改后的代码
-	printf("Hello world\n");
-	*value = p->pNext->data;
-	PNODE q = p->pNext->pNext;
-	free(p->pNext);
-	p->pNext = q;
-	return;
-}
-void sort_list(PNODE pHead) {
-	PNODE p, q;
-	int i, j, t, len = length_list(pHead);
-
-	for (i = 0, p = pHead->pNext; i < len - 1; i++, p = p->pNext) {
-		for (j = i + 1, q = p->pNext; j < len; j++, q = q->pNext) {
-			if (p->data > q->data) {
-				t = p->data;
-				p->data = q->data;
-				q->data = t;
-			}
-		}
-	}
-
-}
+//# include<stdio.h>
+//# include<malloc.h>
+//# include<stdlib.h>
+//
+//# define bool char
+//# define true 1
+//# define false 0
+//
+//typedef struct Node {
+//	int data;	// 数据域
+//	struct Node* pNext;	// 指针域
+//}*PNODE, NODE;
+//
+//PNODE create_list();
+//void traverse_list(PNODE pHead);
+//bool is_empty(PNODE pHead);
+//int length_list(PNODE pHead);
+//bool insert_list(PNODE pHead, int pos, int val);
+//bool delete_list(PNODE pHead, int pos, int* value);
+//void sort_list(PNODE pHead);
+//
+//int main() {
+//	PNODE pHead = NULL;
+//	// 创建一个非循环单链表，并将该链表的头结点的地址赋给pHead
+//	pHead = create_list(); 
+//	//printf("%x\n", pHead);
+//	//is_empty(pHead);
+//	//printf("链表长度为：%d\n", length_list(pHead));
+//	//sort_list(pHead);
+//	//insert_list(pHead, 1, 88);
+//	int val;
+//	traverse_list(pHead);
+//	delete_list(pHead, 3, &val);
+//	printf("删除了元素%d\n", val);
+//	traverse_list(pHead);
+//	return 0;
+//}
+//
+//PNODE create_list() {
+//	int len;	// 用来存放节点的个数
+//	int i;
+//	int val; // 用来临时存放用户输入节点的值。
+//	
+//	// 分配了一个不存放有效数据的头结点
+//	PNODE pHead = (PNODE)malloc(sizeof(NODE));
+//	printf("%x\n", pHead);
+//
+//	if (NULL == pHead) {
+//		printf("分配失败，程序终止！！！\n");
+//		exit(-1);
+//	}
+//
+//	PNODE pTail = pHead;
+//	pTail->pNext = NULL;
+//	printf("%x\n", pTail);
+//
+//	printf("请输入您需要生成的链表节点的个数：len=");
+//	scanf_s("%d", &len);
+//
+//	loop: if (len < 1) {
+//		printf("输入错误，请输入大于1的整数：");
+//		scanf_s("%d", &len);
+//		goto loop;
+//	}
+//
+//	for (i = 0; i < len; i++) {
+//		printf("请输入第%d个节点的值：", i + 1);
+//		scanf_s("%d", &val);
+//
+//		PNODE pNew = (PNODE)malloc(sizeof(NODE));
+//		printf("第%d个节点地址：%x\n", i + 1, pNew);
+//		if (NULL == pNew) {
+//			printf("分配失败，程序终止！！！\n");
+//			exit(-1);
+//		}
+//		pNew->data = val;
+//		pTail->pNext = pNew;
+//		pNew->pNext = NULL;
+//		pTail = pNew;
+//	}
+//	return pHead;
+//}
+//void traverse_list(PNODE pHead) {
+//	PNODE p = pHead->pNext;
+//
+//	while (NULL != p) {
+//		printf("%d\t", p->data);
+//		p = p->pNext;
+//	}
+//	printf("\n");
+//	return;
+//}
+//bool is_empty(PNODE pHead) {
+//	if (pHead->pNext == NULL) {
+//		printf("链表为空！！！\n");
+//		return true;
+//	}
+//	else {
+//		printf("链表不空！！！");
+//		return false;
+//	}
+//}
+//int length_list(PNODE pHead) {
+//	PNODE p = pHead->pNext;
+//	int i = 0;
+//	while (NULL != p) {
+//		i++;
+//		p = p->pNext;
+//	}
+//	return i;
+//}
+//
+//bool insert_list(PNODE pHead, int pos, int val) {
+//	int i = 0;
+//	PNODE p = pHead;
+//	// 1 2 3   2 88   1 88 2 3
+//	while (NULL != p && i < pos - 1) {
+//		p = p->pNext;
+//		i++;
+//	}
+//	if (i > pos - 1 || NULL == p)
+//		return false;
+//	PNODE pNew = (PNODE)malloc(sizeof(NODE));
+//	if (NULL == pNew) {
+//		printf("动态内存分配失败！！！\n");
+//		exit(-1);
+//	}
+//	/*pNew->data = val;
+//	PNODE q = p->pNext;
+//	p->pNext = pNew;
+//	pNew->pNext = q;*/
+//	// 改写
+//	pNew->data = val;
+//	pNew->pNext = p->pNext;
+//	p->pNext = pNew;
+//	return;
+//}
+//// 错误 当节点为1个时
+//// 输出 
+//// 删除了元素-858993460
+//// 1
+//bool delete_list(PNODE pHead, int pos, int* value) {
+//	PNODE p = pHead;
+//	int i = 0;
+//	while (NULL != p && i < pos - 1) {
+//		p = p->pNext;
+//		i++;
+//	}
+//	// 1 2 3  2   1 3
+//	// p = 1
+//	// 原代码
+//	/*if (NULL == p || 1 < pos - 1)
+//		return false;*/
+//	// 修改后的代码
+//	printf("Hello world\n");
+//	*value = p->pNext->data;
+//	PNODE q = p->pNext->pNext;
+//	free(p->pNext);
+//	p->pNext = q;
+//	return;
+//}
+//void sort_list(PNODE pHead) {
+//	PNODE p, q;
+//	int i, j, t, len = length_list(pHead);
+//
+//	for (i = 0, p = pHead->pNext; i < len - 1; i++, p = p->pNext) {
+//		for (j = i + 1, q = p->pNext; j < len; j++, q = q->pNext) {
+//			if (p->data > q->data) {
+//				t = p->data;
+//				p->data = q->data;
+//				q->data = t;
+//			}
+//		}
+//	}
+//
+//}
 
 // 排序（沉底法）
 
