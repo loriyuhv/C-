@@ -74,3 +74,36 @@
 //	
 //	return 0;
 //}
+
+// 指针 形参为指针
+//#include<stdio.h>
+//
+//void f(int* i, int* j) {
+//	/**i = 5;
+//	*j = i;*/
+//	*i = j;
+//	printf("%x\n", *i);
+//}
+//
+//void e(int* j) {
+//	int d = 10;
+//	printf("d: %x\n", &d);
+//	*j = &d;
+//}
+//
+//int main() {
+//	// LinkList L;
+//	int i;
+//	e(&i);
+//	printf("i:%x\n", i);
+//
+//
+//	/*int i = 1;*/
+//	//printf("i:%p\n", &i);
+//	/*int* j;*/
+//	/*f(&i, &j);
+//	printf("j: %p\n", j);*/
+//	//printf("%d\n", i);
+//
+//	return 0;
+//}

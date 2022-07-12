@@ -337,175 +337,269 @@
 
 // 单链表
 
+//#include<stdio.h>
+//#include<malloc.h>
+//#include<stdlib.h>
+//
+//#define bool char
+//#define true 1
+//#define false 0
+//
+//typedef struct Node {
+//	int data;
+//	struct Node* next;
+//}*LinkList, Node;
+//
+//LinkList InitList(LinkList pHead);
+//void ShowList(LinkList);
+//bool GetElem(LinkList pHead, int i, int* e);
+//bool ListInsert01(LinkList pHead, int i, int e);
+//bool ListInsert(LinkList pHead, int i, int e);
+//bool listinsert02(LinkList phead, int i, int e);
+//bool ListDelete(LinkList pHead, int i, int* e);
+//bool ListEmpty(LinkList);
+//int ListLength(LinkList);
+//
+//
+//int main() {
+//	LinkList pHead = NULL;
+//	pHead = InitList(&pHead);
+//	ShowList(pHead);
+//	//printf("链表的长度是%d\n", ListLength(pHead));
+//
+//	int val, pos = 3;
+//
+//	//loop: printf("请输入节点位置:");
+//	//scanf_s("%d%d", &pos, &val);
+//	//if (ListInsert(pHead, 1, 88))
+//	//	printf("%d节点插入值%d成功！！！\n", 1, 88);
+//	//else {
+//	//	printf("输入位置错误，请重新输入：");
+//	//	//goto loop;
+//	//}	
+//	/*ListInsert(pHead, 3, 88);*/
+//	if (ListDelete(pHead, pos, &val))
+//		printf("%d位置删除的值是%d\n", pos, val);
+//	else
+//		printf("当前位置无值，请重新输入！！！\n");
+//	ShowList(pHead);
+//
+//// 得到节点位置值
+////loop: printf("请输入节点位置:");
+////	scanf_s("%d", &pos);
+////	if (GetElem(pHead, pos, &val))
+////		printf("节点%d的值是%d\n", pos, val);
+////	else {
+////		printf("输入位置错误，请重新输入：");
+////		goto loop;
+////	}	
+//	return 0;
+//}
+//
+//LinkList InitList(LinkList pHead) {
+//	int len, i, val;
+//
+//	pHead = (LinkList)malloc(sizeof(Node));
+//	if (NULL == pHead) {
+//		printf("动态内存分配失败！！！\n");
+//		exit(-1);
+//	}
+//	LinkList pTail = pHead;
+//	pTail->next = NULL;
+//
+//	printf("请输入要创建几个节点：");
+//	scanf_s("%d", &len);
+//	for (i = 0; i < len; i++) {
+//		printf("请输入第%d个节点的值：", i + 1);
+//		scanf_s("%d", &val);
+//
+//		LinkList pNew = (LinkList)malloc(sizeof(Node));
+//		if (NULL == pNew) {
+//			printf("动态内存分配失败！！！\n");
+//			exit(-1);
+//		}
+//
+//		pNew->data = val;
+//		pTail->next = pNew;
+//		pNew->next = NULL;
+//		pTail = pNew;
+//	}
+//	return pHead;
+//}
+//void ShowList(LinkList pHead) {
+//	LinkList p = pHead->next;
+//	if (ListEmpty(pHead))
+//	{
+//		printf("链表为空！！\n");
+//		return false;
+//	}
+//	while (NULL != p) {
+//		printf("%d\t", p->data);
+//		p = p->next;
+//	}	
+//	printf("\n");
+//	return;
+//}
+//bool ListEmpty(LinkList pHead) {
+//	if (pHead->next == NULL)
+//		return true;
+//	else
+//		return false;
+//}
+//bool GetElem(LinkList pHead, int i, int* e) {
+//	int j, len = ListLength(pHead);
+//	if (i < 1 || i > len)
+//		return false;
+//	LinkList p = pHead->next;
+//	for (j = 0; j < i; j++) {
+//		*e = p->data;
+//		p = p->next;
+//	}
+//	return true;
+//}
+//int ListLength(LinkList pHead) {
+//	LinkList p = pHead->next;
+//	int len = 0;
+//	while (NULL != p) {
+//		len++;
+//		p = p->next;
+//	}
+//	return len;
+//}
+//bool ListInsert01(LinkList pHead, int i, int e) {
+//	int j = 0, len = ListLength(pHead);
+//	if (i < 1 || i > len + 1) {
+//		return false;
+//	}
+//	LinkList p = pHead;
+//	/*while (NULL != p && j < i - 1) {
+//		p = p->next;
+//		j++;
+//	}*/
+//	while (NULL != p && j < i - 1) {
+//			p = p->next;
+//			i++;
+//	}
+//
+//	LinkList pNew = (LinkList)malloc(sizeof(Node));
+//	if (NULL == pNew) {
+//		printf("动态内存分配失败！！\n");
+//		exit(-1);
+//	}
+//	pNew->data = e;
+//	pNew->next = p->next;
+//	p->next = pNew;
+//	return true;
+//}
+//bool listinsert02(LinkList phead, int i, int e) {
+//	int j;
+//	LinkList p, s;
+//	p = phead;
+//	j = 1;
+//	// 寻找第i - 1个节点
+//	while (p && j < i) {
+//		p = p->next;
+//		++j;
+//	}
+//
+//	if (!p || j > 1)
+//		return false; // 第i个节点不存在
+//
+//	s = (LinkList)malloc(sizeof(Node));
+//	s->data = e;
+//	s->next = p->next;
+//	p->next = s;
+//	return true;
+//}
+//bool ListInsert(LinkList pHead, int i, int e) {
+//	int j;
+//	LinkList p, s;
+//	p = pHead;
+//	j = 1;
+//
+//	while (p && j < i) { // 取得i-1的地址
+//		p = p->next;
+//		++j;
+//	}
+//
+//	if (!p || j > i)
+//		return false;
+//	s = (LinkList)malloc(sizeof(Node));
+//	s->data = e;
+//	s->next = p->next;
+//	p->next = s;
+//	return true;
+//}
+//bool ListDelete(LinkList pHead, int i, int* e) {
+//	int j = 1;
+//	LinkList p = pHead, q;
+//	while (p && j < i) {
+//		p = p->next;
+//		++j;
+//	}
+//
+//	if (!p || j > i - 1)
+//		return false;
+//	
+//	/**e = p->next->data;
+//	q = = p->next->next;
+//	free(p->next);
+//	p->next = q;*/
+//	*e = p->next->data;
+//	q = p->next->next;
+//	free(p->next);
+//	p->next = q;
+//	return false;
+//}
+
+// 单链表的整表创建
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<malloc.h>
+//
+//typedef int ElemType;
+//
+////线性表单链表存储结构
+//typedef struct Node {
+//    ElemType data; // 存放数据元素的数据域
+//    struct Node* next; // 存放后继结点地址的指针域
+//}Node;
+//
+//typedef Node* LinkList;
+//
+//void CreateListHead(LinkList* L, int n);
+//
+//int main() {
+//
+//    return 0;
+//}
+//
+//// 随机产生n个元素的值，建立带表头结点的单链线性表L（头插法）
+//void CreateListHead(LinkList* L, int n) {
+//    LinkList p;
+//    int i;
+//    srand(time(0)); // 初始化随机数种子
+//    *L = (LinkList)malloc(sizeof(Node));
+//    (*L)->next = NULL;
+//
+//
+//    return;
+//}
+
+// 多级指针
 #include<stdio.h>
-#include<malloc.h>
-#include<stdlib.h>
-
-#define bool char
-#define true 1
-#define false 0
-
-typedef struct Node {
-	int data;
-	struct Node* next;
-}*LinkList, Node;
-
-LinkList InitList(LinkList pHead);
-void ShowList(LinkList);
-bool GetElem(LinkList pHead, int i, int* e);
-bool ListInsert01(LinkList pHead, int i, int e);
-bool ListInsert(LinkList pHead, int i, int e);
-bool ListEmpty(LinkList);
-int ListLength(LinkList);
-
 
 int main() {
-	LinkList pHead = NULL;
-	pHead = InitList(&pHead);
-	ShowList(pHead);
-	//printf("链表的长度是%d\n", ListLength(pHead));
+	// LinkList* List;
+	// list = 
+	// c(&List);
+	int i = 10;
+	int* p = &i;
+	int** q = &p;
+	int*** r = &q;
+	printf("%p, %p", p, *q);
 
-	int val, pos;
-
-	//loop: printf("请输入节点位置:");
-	//scanf_s("%d%d", &pos, &val);
-	//if (ListInsert(pHead, 1, 88))
-	//	printf("%d节点插入值%d成功！！！\n", 1, 88);
-	//else {
-	//	printf("输入位置错误，请重新输入：");
-	//	//goto loop;
-	//}	
-	ListInsert(pHead, 2, 88);
-	ShowList(pHead);
-
-// 得到节点位置值
-//loop: printf("请输入节点位置:");
-//	scanf_s("%d", &pos);
-//	if (GetElem(pHead, pos, &val))
-//		printf("节点%d的值是%d\n", pos, val);
-//	else {
-//		printf("输入位置错误，请重新输入：");
-//		goto loop;
-//	}	
-	return 0;
 }
-
-LinkList InitList(LinkList pHead) {
-	int len, i, val;
-
-	pHead = (LinkList)malloc(sizeof(Node));
-	if (NULL == pHead) {
-		printf("动态内存分配失败！！！\n");
-		exit(-1);
-	}
-	LinkList pTail = pHead;
-	pTail->next = NULL;
-
-	printf("请输入要创建几个节点：");
-	scanf_s("%d", &len);
-	for (i = 0; i < len; i++) {
-		printf("请输入第%d个节点的值：", i + 1);
-		scanf_s("%d", &val);
-
-		LinkList pNew = (LinkList)malloc(sizeof(Node));
-		if (NULL == pNew) {
-			printf("动态内存分配失败！！！\n");
-			exit(-1);
-		}
-
-		pNew->data = val;
-		pTail->next = pNew;
-		pNew->next = NULL;
-		pTail = pNew;
-	}
-	return pHead;
-}
-void ShowList(LinkList pHead) {
-	LinkList p = pHead->next;
-	if (ListEmpty(pHead))
-	{
-		printf("链表为空！！\n");
-		return false;
-	}
-	while (NULL != p) {
-		printf("%d\t", p->data);
-		p = p->next;
-	}	
-	printf("\n");
-	return;
-}
-bool ListEmpty(LinkList pHead) {
-	if (pHead->next == NULL)
-		return true;
-	else
-		return false;
-}
-bool GetElem(LinkList pHead, int i, int* e) {
-	int j, len = ListLength(pHead);
-	if (i < 1 || i > len)
-		return false;
-	LinkList p = pHead->next;
-	for (j = 0; j < i; j++) {
-		*e = p->data;
-		p = p->next;
-	}
-	return true;
-}
-int ListLength(LinkList pHead) {
-	LinkList p = pHead->next;
-	int len = 0;
-	while (NULL != p) {
-		len++;
-		p = p->next;
-	}
-	return len;
-}
-bool ListInsert01(LinkList pHead, int i, int e) {
-	int j = 0, len = ListLength(pHead);
-	if (i < 1 || i > len + 1) {
-		return false;
-	}
-	LinkList p = pHead;
-	/*while (NULL != p && j < i - 1) {
-		p = p->next;
-		j++;
-	}*/
-	while (NULL != p && j < i - 1) {
-			p = p->next;
-			i++;
-	}
-
-	LinkList pNew = (LinkList)malloc(sizeof(Node));
-	if (NULL == pNew) {
-		printf("动态内存分配失败！！\n");
-		exit(-1);
-	}
-	pNew->data = e;
-	pNew->next = p->next;
-	p->next = pNew;
-	return true;
-}
-bool ListInsert(LinkList pHead, int i, int e) {
-	int j;
-	LinkList p, s;
-	p = pHead;
-	j = 1;
-	// 寻找第i - 1个节点
-	while (p && j < i) {
-		p = p->next;
-		++j;
-	}
-
-	if (!p || j > 1)
-		return false; // 第i个节点不存在
-
-	s = (LinkList)malloc(sizeof(Node));
-	s->data = e;
-	s->next = p->next;
-	p->next = s;
-	return true;
-}
-
 
 
 
