@@ -48,3 +48,29 @@
 //	printf("%d", sum);
 //	return 0;
 //}
+
+//# include<stdio.h>
+//
+//int main() {
+//
+//	int z = 0, y = 0;
+//	int i = 0, n = 1;
+//	for (; i < n; i++)
+//		;
+//	printf("%d\n", i);
+//}
+
+//# include<stdio.h>
+//
+//int main() {
+//	int* p = NULL;
+//	int i = 6, j = 1;
+//	while (!p && i > 5) {
+//		printf("Hello world!\n");
+//		p = 5;
+//		break;
+//	}
+//	printf("Hello apple!!\n");
+//	
+//	return 0;
+//}

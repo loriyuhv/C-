@@ -208,129 +208,304 @@
 //	return true;
 //}
 
-# include<stdio.h>
-# include<malloc.h>
-# include<stdlib.h>
+//# include<stdio.h>
+//# include<malloc.h>
+//# include<stdlib.h>
+//
+//# define bool char
+//# define true 1
+//# define false 0
+//
+//// 结构体
+//typedef struct List {
+//	int* p;
+//	int len;
+//	int cnt;
+//}*PL, L;
+//
+//// Operation
+//void InitList(PL pL, int len);
+//void TraverseList(PL pL);
+//bool ListInsert(PL pL, int i, int e);
+//bool AddList(PL pL, int e);
+//bool ListEmpty(PL pL);
+//bool ListFull(PL pL);
+//bool ListDelete(PL pL, int i, int* e);
+//int ListLength(PL pL);
+//
+//int main() {
+//	L La;
+//	int value;
+//	InitList(&La, 6);
+//	for (int i = 1; i <= 5; i++) {
+//		AddList(&La, i);
+//	}
+//	TraverseList(&La);
+//	if (ListDelete(&La, 0, &value)) {
+//		printf("位置%d删除成功，删除了元素%d！！!\n", 0, value);
+//	}
+//	else {
+//		printf("Failed！！！\n");
+//	}
+//	
+//	TraverseList(&La);
+//	//printf("线性表La元素个数为：%d", ListLength(&La));
+//	return 0;
+//}
+//
+//void InitList(PL pL, int len) {
+//	// 初始化数组
+//	pL->p = (int*)malloc(sizeof(int) * len);
+//	if (NULL == pL) {
+//		printf("动态内存分配失败！！！\n");
+//		exit(-1);
+//	}
+//
+//	pL->len = len;
+//	pL->cnt=0;
+//	return;
+//}
+//void TraverseList(PL pL) {
+//	if (ListEmpty(pL))
+//		printf("列表为空！！！\n");
+//
+//	for (int i = 0; i < pL->cnt; i++)
+//		printf("%d\t", pL->p[i]);
+//	printf("\n");
+//	return;
+//}
+//bool ListEmpty(PL pL) {
+//	if (pL->cnt == 0)
+//		return true;
+//	else
+//		return false;
+//}
+//bool ListFull(PL pL) {
+//	if (pL->cnt == pL->len)
+//		return true;
+//	else
+//		return false;
+//}
+//bool AddList(PL pL, int e) {
+//	if (ListFull(pL)) {
+//		printf("列表已满！！！\n");
+//		printf("%d追加失败！！！\n", e);
+//		return false;
+//	}
+//	pL->p[pL->cnt] = e;
+//	pL->cnt++;
+//	printf("%d追加成功！！！\n", e);
+//	return true;
+//}
+//bool ListInsert(PL pL, int i, int e) {
+//	if (ListFull(pL)) {
+//		printf("列表已满！！！");
+//		return false;
+//	}
+//	if (i < 1 || i > pL->cnt + 1) {
+//		printf("数值%d插入位置有错，插入失败！！！\n", e);
+//		return false;
+//	}
+//	for (int j = pL->cnt; j > i - 1; j--) { // 1 2 3 4 5   6 88  5 5
+//		pL->p[j] = pL->p[j - 1];
+//	}
+//	printf("数值%d插入位置%d成功！！！\n", e, i);
+//	pL->p[i - 1] = e;
+//	pL->cnt++;
+//	return true;
+//}
+//bool ListDelete(PL pL, int i, int* e) {
+//	if (ListEmpty(pL)) {
+//		printf("线性表为空！！！\n");
+//		return false;
+//	}
+//	if (i < 1 || i > pL->cnt + 1) {
+//		printf("输入位置错误，不可操作！！！\n");
+//		return false;
+//	}
+//	*e = pL->p[i - 1];
+//	// 1 2 3 4 5  4 5
+//	for (int j = i; j < pL->cnt; j++) {
+//		pL->p[j - 1] = pL->p[j];
+//	}
+//	pL->cnt--;
+//	return true;
+//}
+//int ListLength(PL pL) {
+//	return pL->cnt;
+//}
 
-# define bool char
-# define true 1
-# define false 0
+// 单链表
 
-// 结构体
-typedef struct List {
-	int* p;
-	int len;
-	int cnt;
-}*PL, L;
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
 
-// Operation
-void InitList(PL pL, int len);
-void TraverseList(PL pL);
-bool ListInsert(PL pL, int i, int e);
-bool AddList(PL pL, int e);
-bool ListEmpty(PL pL);
-bool ListFull(PL pL);
-bool ListDelete(PL pL, int i, int* e);
-int ListLength(PL pL);
+#define bool char
+#define true 1
+#define false 0
+
+typedef struct Node {
+	int data;
+	struct Node* next;
+}*LinkList, Node;
+
+LinkList InitList(LinkList pHead);
+void ShowList(LinkList);
+bool GetElem(LinkList pHead, int i, int* e);
+bool ListInsert01(LinkList pHead, int i, int e);
+bool ListInsert(LinkList pHead, int i, int e);
+bool ListEmpty(LinkList);
+int ListLength(LinkList);
+
 
 int main() {
-	L La;
-	int value;
-	InitList(&La, 6);
-	for (int i = 1; i <= 5; i++) {
-		AddList(&La, i);
-	}
-	TraverseList(&La);
-	if (ListDelete(&La, 0, &value)) {
-		printf("位置%d删除成功，删除了元素%d！！!\n", 0, value);
-	}
-	else {
-		printf("Failed！！！\n");
-	}
-	
-	TraverseList(&La);
-	//printf("线性表La元素个数为：%d", ListLength(&La));
+	LinkList pHead = NULL;
+	pHead = InitList(&pHead);
+	ShowList(pHead);
+	//printf("链表的长度是%d\n", ListLength(pHead));
+
+	int val, pos;
+
+	//loop: printf("请输入节点位置:");
+	//scanf_s("%d%d", &pos, &val);
+	//if (ListInsert(pHead, 1, 88))
+	//	printf("%d节点插入值%d成功！！！\n", 1, 88);
+	//else {
+	//	printf("输入位置错误，请重新输入：");
+	//	//goto loop;
+	//}	
+	ListInsert(pHead, 2, 88);
+	ShowList(pHead);
+
+// 得到节点位置值
+//loop: printf("请输入节点位置:");
+//	scanf_s("%d", &pos);
+//	if (GetElem(pHead, pos, &val))
+//		printf("节点%d的值是%d\n", pos, val);
+//	else {
+//		printf("输入位置错误，请重新输入：");
+//		goto loop;
+//	}	
 	return 0;
 }
 
-void InitList(PL pL, int len) {
-	// 初始化数组
-	pL->p = (int*)malloc(sizeof(int) * len);
-	if (NULL == pL) {
+LinkList InitList(LinkList pHead) {
+	int len, i, val;
+
+	pHead = (LinkList)malloc(sizeof(Node));
+	if (NULL == pHead) {
 		printf("动态内存分配失败！！！\n");
 		exit(-1);
 	}
+	LinkList pTail = pHead;
+	pTail->next = NULL;
 
-	pL->len = len;
-	pL->cnt=0;
-	return;
+	printf("请输入要创建几个节点：");
+	scanf_s("%d", &len);
+	for (i = 0; i < len; i++) {
+		printf("请输入第%d个节点的值：", i + 1);
+		scanf_s("%d", &val);
+
+		LinkList pNew = (LinkList)malloc(sizeof(Node));
+		if (NULL == pNew) {
+			printf("动态内存分配失败！！！\n");
+			exit(-1);
+		}
+
+		pNew->data = val;
+		pTail->next = pNew;
+		pNew->next = NULL;
+		pTail = pNew;
+	}
+	return pHead;
 }
-void TraverseList(PL pL) {
-	if (ListEmpty(pL))
-		printf("列表为空！！！\n");
-
-	for (int i = 0; i < pL->cnt; i++)
-		printf("%d\t", pL->p[i]);
+void ShowList(LinkList pHead) {
+	LinkList p = pHead->next;
+	if (ListEmpty(pHead))
+	{
+		printf("链表为空！！\n");
+		return false;
+	}
+	while (NULL != p) {
+		printf("%d\t", p->data);
+		p = p->next;
+	}	
 	printf("\n");
 	return;
 }
-bool ListEmpty(PL pL) {
-	if (pL->cnt == 0)
+bool ListEmpty(LinkList pHead) {
+	if (pHead->next == NULL)
 		return true;
 	else
 		return false;
 }
-bool ListFull(PL pL) {
-	if (pL->cnt == pL->len)
-		return true;
-	else
+bool GetElem(LinkList pHead, int i, int* e) {
+	int j, len = ListLength(pHead);
+	if (i < 1 || i > len)
 		return false;
-}
-bool AddList(PL pL, int e) {
-	if (ListFull(pL)) {
-		printf("列表已满！！！\n");
-		printf("%d追加失败！！！\n", e);
-		return false;
+	LinkList p = pHead->next;
+	for (j = 0; j < i; j++) {
+		*e = p->data;
+		p = p->next;
 	}
-	pL->p[pL->cnt] = e;
-	pL->cnt++;
-	printf("%d追加成功！！！\n", e);
 	return true;
 }
-bool ListInsert(PL pL, int i, int e) {
-	if (ListFull(pL)) {
-		printf("列表已满！！！");
+int ListLength(LinkList pHead) {
+	LinkList p = pHead->next;
+	int len = 0;
+	while (NULL != p) {
+		len++;
+		p = p->next;
+	}
+	return len;
+}
+bool ListInsert01(LinkList pHead, int i, int e) {
+	int j = 0, len = ListLength(pHead);
+	if (i < 1 || i > len + 1) {
 		return false;
 	}
-	if (i < 1 || i > pL->cnt + 1) {
-		printf("数值%d插入位置有错，插入失败！！！\n", e);
-		return false;
+	LinkList p = pHead;
+	/*while (NULL != p && j < i - 1) {
+		p = p->next;
+		j++;
+	}*/
+	while (NULL != p && j < i - 1) {
+			p = p->next;
+			i++;
 	}
-	for (int j = pL->cnt; j > i - 1; j--) { // 1 2 3 4 5   6 88  5 5
-		pL->p[j] = pL->p[j - 1];
+
+	LinkList pNew = (LinkList)malloc(sizeof(Node));
+	if (NULL == pNew) {
+		printf("动态内存分配失败！！\n");
+		exit(-1);
 	}
-	printf("数值%d插入位置%d成功！！！\n", e, i);
-	pL->p[i - 1] = e;
-	pL->cnt++;
+	pNew->data = e;
+	pNew->next = p->next;
+	p->next = pNew;
 	return true;
 }
-bool ListDelete(PL pL, int i, int* e) {
-	if (ListEmpty(pL)) {
-		printf("线性表为空！！！\n");
-		return false;
+bool ListInsert(LinkList pHead, int i, int e) {
+	int j;
+	LinkList p, s;
+	p = pHead;
+	j = 1;
+	// 寻找第i - 1个节点
+	while (p && j < i) {
+		p = p->next;
+		++j;
 	}
-	if (i < 1 || i > pL->cnt + 1) {
-		printf("输入位置错误，不可操作！！！\n");
-		return false;
-	}
-	*e = pL->p[i - 1];
-	// 1 2 3 4 5  4 5
-	for (int j = i; j < pL->cnt; j++) {
-		pL->p[j - 1] = pL->p[j];
-	}
-	pL->cnt--;
+
+	if (!p || j > 1)
+		return false; // 第i个节点不存在
+
+	s = (LinkList)malloc(sizeof(Node));
+	s->data = e;
+	s->next = p->next;
+	p->next = s;
 	return true;
 }
-int ListLength(PL pL) {
-	return pL->cnt;
-}
+
+
+
+
