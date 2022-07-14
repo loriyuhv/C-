@@ -137,9 +137,9 @@
 // 基准数 6 然后把大的房右边，小的放左边
 // 3 1 2 5 4 6 9 7 10 8
 
-#include<stdio.h>
-int a[100], n = 5;
-
+//#include<stdio.h>
+//int a[100], n = 5;
+//
 //void quicksort(int left, int right) {
 //	int i, j, t, temp;
 //	if (left > right)
@@ -174,46 +174,105 @@ int a[100], n = 5;
 //	quicksort(i + 1, right);
 //	return;
 //}
+//
+//void QuickSort(int left, int right) {
+//	int i, j, temp, t;
+//	if (left > right)
+//		return;
+//	temp = a[left]; // 基准数
+//	i = left;
+//	j = right;
+//
+//	// 两个变量i，j.
+//	// j从右往左找小于基准数的数
+//	// i从左往右找大于基准数的数
+//	while (i != j) { //如果等于就代表相遇，然后把相遇的值和基准数互换
+//		while (a[j] >= temp && i < j)
+//			j--;
+//		while (a[i] <= temp && i < j)
+//			i++;
+//		if (i < j)
+//			t = a[i], a[i] = a[j], a[j] = t;
+//	}
+//	// 最终将基准数归位
+//	a[left] = a[i];
+//	a[i] = temp;
+//
+//	QuickSort(left, i - 1);
+//	QuickSort(i + 1, right);
+//}
+//
+//int main() {
+//	int i;
+//	// 读入数据
+//	for (i = 1; i <= n; i++)
+//		scanf_s("%d", &a[i]);
+//
+//	QuickSort(1, n); // 快速排序调用
+//	//quicksort(1, n);
+//
+//	for (i = 1; i <= n; i++)
+//		printf("%d\t", a[i]);
+//
+//	return 0;
+//}
 
-void QuickSort(int left, int right) {
-	int i, j, temp, t;
-	if (left > right)
-		return;
-	temp = a[left]; // 基准数
-	i = left;
-	j = right;
+// 快速排序
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//void QuickSort(int left, int right, int* a) {
+//	int i, j, temp, t;
+//	if (left > right)
+//		return;
+//	temp = a[left];
+//	i = left;
+//	j = right;
+//	
+//	while (i != j) { // 当i 与 j相遇，就交换基准数
+//		while (a[j] >= temp && i < j)
+//			j--;
+//		while (a[i] <= temp && i < j)
+//			i++;
+//		if (i < j)
+//			t = a[i], a[i] = a[j], a[j] = t;
+//	}
+//	a[left] = a[i];
+//	a[i] = temp;
+//
+//	QuickSort(left, i - 1, a);
+//	QuickSort(i + 1, right, a);
+//}
+//
+//int main() {
+//	int a[10001], i, j, n = 10000;
+//	srand(time(0)); // 初始化随机数种子
+//	for (i = 1; i <= n; i++)
+//		a[i] = rand() % 10000 + 1; // 随机生成100以内的数字
+//
+//	QuickSort(1, n, a);
+//
+//	for (i = 1; i <= n; i++)
+//		printf("%d\t", a[i]);
+//
+//	return 0;
+//}
 
-	// 两个变量i，j.
-	// j从右往左找小于基准数的数
-	// i从左往右找大于基准数的数
-	while (i != j) { //如果等于就代表相遇，然后把相遇的值和基准数互换
-		while (a[j] >= temp && i < j)
-			j--;
-		while (a[i] <= temp && i < j)
-			i++;
-		if (i < j)
-			t = a[i], a[i] = a[j], a[j] = t;
-	}
-	// 最终将基准数归位
-	a[left] = a[i];
-	a[i] = temp;
-
-	QuickSort(left, i - 1);
-	QuickSort(i + 1, right);
-}
+#include<stdio.h>
+#include<stdlib.h>
 
 int main() {
-	int i;
-	// 读入数据
+	int a[101], i, j, n = 10, t;
+	srand(time(0)); // 初始化随机数种子
 	for (i = 1; i <= n; i++)
-		scanf_s("%d", &a[i]);
+		a[i] = rand() % 100 + 1; // 随机生成100以内的数字
 
-	QuickSort(1, n); // 快速排序调用
-	//quicksort(1, n);
-
+	for (i = 1; i < n; i++)
+		for (j = 1; j <= n - i; j++)
+			if (a[j] > a[j + 1])
+				t = a[j], a[j] = a[j + 1], a[j + 1] = t;
 	for (i = 1; i <= n; i++)
 		printf("%d\t", a[i]);
-
 	return 0;
 }
 
