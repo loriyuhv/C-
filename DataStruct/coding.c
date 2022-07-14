@@ -553,133 +553,133 @@
 //}
 
 // 单链表的整表创建
-#include<stdio.h>
-#include<stdlib.h>
-#include<malloc.h>
-#define bool char
-#define true 1
-#define false 0
-
-typedef int ElemType;
-
-//线性表单链表存储结构
-typedef struct Node {
-    ElemType data; // 存放数据元素的数据域
-    struct Node* next; // 存放后继结点地址的指针域
-}Node;
-
-typedef Node* LinkList;
-
-void CreateListHead(LinkList* L, int n);
-void CreateListTail(LinkList* L, int n);
-bool AllocatedDRAM(LinkList* L);
-bool ShowList(LinkList* L);
-bool ClearList(LinkList* L);
-
-int main() {
-    LinkList l;
-    //CreateListHead(&l, 3);
-    CreateListTail(&l, 3);
-    ClearList(&l);
-    ShowList(&l);
-    return 0;
-}
-
-// 随机产生n个元素的值，建立带表头结点的单链线性表L（头插法）
-
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<malloc.h>
+//#define bool char
+//#define true 1
+//#define false 0
+//
+//typedef int ElemType;
+//
+////线性表单链表存储结构
+//typedef struct Node {
+//    ElemType data; // 存放数据元素的数据域
+//    struct Node* next; // 存放后继结点地址的指针域
+//}Node;
+//
+//typedef Node* LinkList;
+//
+//void CreateListHead(LinkList* L, int n);
+//void CreateListTail(LinkList* L, int n);
+//bool AllocatedDRAM(LinkList* L);
+//bool ShowList(LinkList* L);
+//bool ClearList(LinkList* L);
+//
+//int main() {
+//    LinkList l;
+//    //CreateListHead(&l, 3);
+//    CreateListTail(&l, 3);
+//    ClearList(&l);
+//    ShowList(&l);
+//    return 0;
+//}
+//
+//// 随机产生n个元素的值，建立带表头结点的单链线性表L（头插法）
+//
+////void CreateListHead(LinkList* L, int n) {
+////    LinkList p;
+////    int i;
+////    //srand(time(0)); // 初始化随机数种子
+////    *L = (LinkList)malloc(sizeof(Node));
+////    AllocatedDRAM(*L); 
+////    (*L)->next = NULL; // 先建立一个带头结点的单链表
+////    for (i = 0; i < n; i++) {
+////        p = (LinkList)malloc(sizeof(Node));
+////        AllocatedDRAM(p);
+////        //p->data = rand() % 100 + 1; // 随机生成100以内的数字
+////        p->data = i + 1;
+////        p->next = (*L)->next;
+////        (*L)->next = p; // 插入到表头
+////    }
+////    return;
+////}
 //void CreateListHead(LinkList* L, int n) {
+//    // LinkList L
 //    LinkList p;
 //    int i;
-//    //srand(time(0)); // 初始化随机数种子
 //    *L = (LinkList)malloc(sizeof(Node));
-//    AllocatedDRAM(*L); 
+//    AllocatedDRAM(&L);
 //    (*L)->next = NULL; // 先建立一个带头结点的单链表
 //    for (i = 0; i < n; i++) {
 //        p = (LinkList)malloc(sizeof(Node));
-//        AllocatedDRAM(p);
-//        //p->data = rand() % 100 + 1; // 随机生成100以内的数字
+//        AllocatedDRAM(&p);
 //        p->data = i + 1;
 //        p->next = (*L)->next;
 //        (*L)->next = p; // 插入到表头
 //    }
 //    return;
 //}
-void CreateListHead(LinkList* L, int n) {
-    // LinkList L
-    LinkList p;
-    int i;
-    *L = (LinkList)malloc(sizeof(Node));
-    AllocatedDRAM(&L);
-    (*L)->next = NULL; // 先建立一个带头结点的单链表
-    for (i = 0; i < n; i++) {
-        p = (LinkList)malloc(sizeof(Node));
-        AllocatedDRAM(&p);
-        p->data = i + 1;
-        p->next = (*L)->next;
-        (*L)->next = p; // 插入到表头
-    }
-    return;
-}
-//void CreateListTail(LinkList* L, int n) {
-//    LinkList r, p;
-//    int i;
-//    srand(time(0)); // 初始化随机数种子
-//    (*L) = (LinkList)malloc(sizeof(Node));
-//    AllocatedDRAM(*L);
-//    r = *L;
-//    for (i = 0; i < n; i++) {
-//        p = (LinkList)malloc(sizeof(Node));
-//        AllocatedDRAM(p);
-//        p->data = i + 1;
-//        r->next = p;
-//        r = p;
-//        /*(*L)->next = p;
-//        (*L) = p;*/
+////void CreateListTail(LinkList* L, int n) {
+////    LinkList r, p;
+////    int i;
+////    srand(time(0)); // 初始化随机数种子
+////    (*L) = (LinkList)malloc(sizeof(Node));
+////    AllocatedDRAM(*L);
+////    r = *L;
+////    for (i = 0; i < n; i++) {
+////        p = (LinkList)malloc(sizeof(Node));
+////        AllocatedDRAM(p);
+////        p->data = i + 1;
+////        r->next = p;
+////        r = p;
+////        /*(*L)->next = p;
+////        (*L) = p;*/
+////    }
+////    /*(*L)->next = NULL;*/
+////    r->next = NULL;
+////}
+//bool AllocatedDRAM(LinkList* L) {
+//    /*实现判断动态内存分配是否失败, */
+//    if (*L != NULL)
+//        return true;
+//    else {
+//        printf("动态内存分配失败!!!\n");
+//        exit(-1);
 //    }
-//    /*(*L)->next = NULL;*/
-//    r->next = NULL;
 //}
-bool AllocatedDRAM(LinkList* L) {
-    /*实现判断动态内存分配是否失败, */
-    if (*L != NULL)
-        return true;
-    else {
-        printf("动态内存分配失败!!!\n");
-        exit(-1);
-    }
-}
-void CreateListTail(LinkList* L, int n) {
-    LinkList p, r;
-    *L = (LinkList)malloc(sizeof(Node));
-    AllocatedDRAM(&L);
-    r = *L; // r为指向尾部的结点
-    for (int i = 0; i < n; i++) {
-        p = (LinkList)malloc(sizeof(Node)); // 生成新结点
-        p->data = i + 1;
-        r->next = p; // 将表尾终端结点的指针指向新结点
-        r = p; // 将当前的新结点定义为表尾终端结点
-    }
-    r->next = NULL; // 表示当前链接结束
-    return;
-}
-bool ShowList(LinkList* L) {
-    LinkList p = (*L)->next;
-    while (p) {
-        printf("%d\t", p->data);
-        p = p->next;
-    }
-}
-bool ClearList(LinkList* L) {
-    LinkList p, q;
-    p = (*L)->next; // p指向第一个结点
-    while (p) { // 没到表尾
-        q = p->next;
-        free(p);
-        p = q->next;
-    }
-    (*L)->next = NULL;
-    return;
-}
+//void CreateListTail(LinkList* L, int n) {
+//    LinkList p, r;
+//    *L = (LinkList)malloc(sizeof(Node));
+//    AllocatedDRAM(&L);
+//    r = *L; // r为指向尾部的结点
+//    for (int i = 0; i < n; i++) {
+//        p = (LinkList)malloc(sizeof(Node)); // 生成新结点
+//        p->data = i + 1;
+//        r->next = p; // 将表尾终端结点的指针指向新结点
+//        r = p; // 将当前的新结点定义为表尾终端结点
+//    }
+//    r->next = NULL; // 表示当前链接结束
+//    return;
+//}
+//bool ShowList(LinkList* L) {
+//    LinkList p = (*L)->next;
+//    while (p) {
+//        printf("%d\t", p->data);
+//        p = p->next;
+//    }
+//}
+//bool ClearList(LinkList* L) {
+//    LinkList p, q;
+//    p = (*L)->next; // p指向第一个结点
+//    while (p) { // 没到表尾
+//        q = p->next;
+//        free(p);
+//        p = q->next;
+//    }
+//    (*L)->next = NULL;
+//    return;
+//}
 
 
 

@@ -107,3 +107,11 @@
 //
 //	return 0;
 //}
+
+//#include<stdio.h>
+//
+//int main() {
+//	long int i;
+//	i = (500 * 400) * (300 * 200);
+//	printf("%d\n", i);
+//}
