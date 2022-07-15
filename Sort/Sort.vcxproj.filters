@@ -18,5 +18,8 @@
     <ClCompile Include="sort.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="coding.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

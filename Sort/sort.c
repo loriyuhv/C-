@@ -258,21 +258,21 @@
 //	return 0;
 //}
 
-#include<stdio.h>
-#include<stdlib.h>
-
-int main() {
-	int a[101], i, j, n = 10, t;
-	srand(time(0)); // 初始化随机数种子
-	for (i = 1; i <= n; i++)
-		a[i] = rand() % 100 + 1; // 随机生成100以内的数字
-
-	for (i = 1; i < n; i++)
-		for (j = 1; j <= n - i; j++)
-			if (a[j] > a[j + 1])
-				t = a[j], a[j] = a[j + 1], a[j + 1] = t;
-	for (i = 1; i <= n; i++)
-		printf("%d\t", a[i]);
-	return 0;
-}
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//int main() {
+//	int a[101], i, j, n = 10, t;
+//	srand(time(0)); // 初始化随机数种子
+//	for (i = 1; i <= n; i++)
+//		a[i] = rand() % 100 + 1; // 随机生成100以内的数字
+//
+//	for (i = 1; i < n; i++)
+//		for (j = 1; j <= n - i; j++)
+//			if (a[j] > a[j + 1])
+//				t = a[j], a[j] = a[j + 1], a[j + 1] = t;
+//	for (i = 1; i <= n; i++)
+//		printf("%d\t", a[i]);
+//	return 0;
+//}
 

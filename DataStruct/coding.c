@@ -553,6 +553,7 @@
 //}
 
 // 单链表的整表创建
+
 //#include<stdio.h>
 //#include<stdlib.h>
 //#include<malloc.h>
@@ -681,8 +682,6 @@
 //    return;
 //}
 
-
-
 // 多级指针
 //#include<stdio.h>
 //
@@ -705,6 +704,110 @@
 // *i = 5;
 //
 //}
+
+// 单链表的整表创建
+
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+
+#define bool char
+#define true 1
+#define false 0
+
+typedef struct Node {
+	int data; // 存放数据元素的数据域
+	struct Node* next; // 存放后继结点的指针域
+}*LinkList, Node;
+
+// 建立带表头结点的单链线性表（头插法）
+void CreateListHead(LinkList* L, int n);
+// 建立带表头结点的单链线性表（尾插法）
+void CreateListTail(LinkList* L, int n);
+void AllocateMemory(LinkList L);
+void ShowList(LinkList L);
+
+int main() {
+	LinkList node, node1, node3;
+	CreateListHead(&node, 5);
+	CreateListTail(&node1, 5);
+	CreateListTail(&node3, 10);
+	ShowList(node);
+	printf("\n");
+	ShowList(node1);
+	printf("\n");
+	ShowList(node3);
+	return 0;
+}
+
+void CreateListHead(LinkList* L, int n) {
+	LinkList p;
+	int i;
+	*L = (LinkList)malloc(sizeof(Node));
+	if (NULL == *L) {
+		printf("动态内存分配不成功！！！\n");
+		exit(-1);
+	}
+	else {
+		(*L)->next = NULL;
+	}
+
+	for (i = 0; i < n; i++) {
+		p = (LinkList)malloc(sizeof(Node));
+		if (NULL == p) {
+			printf("动态内存分配不成功！！！\n");
+			exit(-1);
+		}
+		else {
+			p->data = i + 1;
+			p->next = (*L)->next;
+			(*L)->next = p;
+		}
+	}
+	return;	
+}
+void CreateListTail(LinkList* L, int n) {
+	LinkList r, p;
+	int i;
+	*L = (LinkList)malloc(sizeof(Node));
+	if (NULL == *L) {
+		printf("动态内存分配不成功！！！\n");
+		exit(-1);
+	}
+	r = (*L);
+	r->next = NULL;
+
+	for (i = 0; i < n; i++) {
+		p = (LinkList)malloc(sizeof(Node));
+		if (NULL == p) {
+			printf("动态内存分配不成功！！！\n");
+			exit(-1);
+		} 
+		else {
+			p->data = i + 1;
+			p->next = r->next;
+			r->next = p;
+			r = p;
+		}
+	}
+	return;
+}
+void AllocateMemory(LinkList L) {
+	if (L == NULL) {
+		printf("动态内存分配失败！！！\n");
+		exit(-1);
+	}
+}
+void ShowList(LinkList L) {
+	LinkList p = L->next;
+	if (p == NULL)
+		printf("链表为空！！！");
+	while (NULL != p) {
+		printf("%d\t", p->data);
+		p = p->next;
+	}
+	return;
+}
 
 
 
